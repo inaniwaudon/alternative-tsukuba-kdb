@@ -1,0 +1,105 @@
+#page {
+	width: 1100px;
+	margin: 10rem auto 0 auto;
+}
+
+header {
+	width: 100%;
+	border-bottom: solid 1px #ccc;
+	position:fixed;
+	top: 0;
+	background: #fff;
+}
+
+header p {
+	margin:0;
+}
+
+header div.content {
+	width: 1100px;
+	margin: auto;
+	padding: 0.6rem 0;
+}
+
+header .h4 {
+	width: 4rem;
+	text-align: justify;
+	margin-right: 1.4rem;
+	display: inline-block;
+}
+
+header input[type="text"], header select {
+	height: 1.8rem;
+	line-height: 1.8rem;
+	vertical-align: top;
+}
+
+header input[type="text"] {
+	width: 20rem;
+}
+
+a#submit {
+	color: #fff;
+	height: 1rem;
+	line-height:1rem;
+	text-decoration: none;
+	padding:0.6rem 0.4rem;
+	background: #60c;
+	display: inline-block;
+}
+
+table {
+	width: 100%;
+	line-height: 1.4em;
+	font-size: 0.9rem;
+	table-layout: fixed;
+	overflow-x: scroll;
+	border-collapse: collapse;
+}
+
+tr th {
+	color: #fff;
+	background: #60c;
+}
+
+td {
+	padding: 0.2rem 0;
+	border-bottom: solid 1px #ccc;
+	vertical-align: top;
+}
+
+td a.syllabus {
+	color: #fff;
+	text-align: center;
+	text-decoration: none;
+	margin-top: 0.3rem;
+	padding: 0.1rem 0.4rem;
+	border-radius: 1rem;
+	background: #60c;
+	display: inline-block;
+}
+
+td {
+	padding-right: 0.4rem;
+}
+
+tr *:nth-child(1) { width: 14rem; }
+tr *:nth-child(2) { width: 4rem; }
+tr *:nth-child(3) { width: 4rem; }
+tr *:nth-child(4) { width: 8rem; }
+tr *:nth-child(5) { width: 8rem; }
+tr *:nth-child(6) { width: 6rem; }
+tr td:nth-child(7) {
+	width:18rem;
+	line-height: 1.3em;
+	font-size: 0.6rem;
+}
+tr td:nth-child(8) {
+	line-height: 1.3em;
+	font-size: 0.8rem;
+}
+
+footer {
+	text-align: center;
+	margin-top: 1rem;
+}
