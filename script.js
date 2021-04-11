@@ -49,7 +49,7 @@ window.onload = function () {
 		let matchesPeriod = options.period != "null" && line[6].indexOf(options.period) < 0;
 
 		if (
-			(options.keyword != "" && line[1].indexOf(options.keyword) < 0) ||
+			(options.keyword != "" && line[1].indexOf(options.keyword) < 0 && line[0] != options.keyword) ||
 			matchesSeason ||
 			matchesModule ||
 			matchesDay ||
