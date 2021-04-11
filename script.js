@@ -24,6 +24,12 @@ window.onload = function () {
 		form.day.value = "null";
 		form.period.value = "null";
 		form.online.value = "null";
+
+		checkName.checked = true;
+		checkNo.checked = true;
+		checkPerson.checked = false;
+		checkRoom.checked = false;
+		checkAbstract.checked = false;
 	});
 
 	// display a line of the table
