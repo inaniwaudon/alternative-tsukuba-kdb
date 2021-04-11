@@ -29,13 +29,9 @@ window.onload = function () {
 		tr.innerHTML += `<td>${line[9]}</td>`;
 	}
 
-	const updateTable = (options, index, continuous) => {
+	const updateTable = (options, index) => {
 		index = index || 0;
 		let line;
-
-		if (!continuous && typeof timeout !== 'undefined') {
-			clearTimeout(timeout);
-		}
 
 		while (true) {
 			line = data[index];
@@ -46,20 +42,14 @@ window.onload = function () {
 				return;
 			}
 
-			let matchesSeason = options.season != "null" && line[5].indexOf(options.season) < 0;
-			let matchesModule = options.module_ != "null" && line[5].indexOf(options.module_) < 0;
-			let matchesDay = options.day != "null" && line[6].indexOf(options.day) < 0;
-			let matchesPeriod = options.period != "null" && line[6].indexOf(options.period) < 0;
-
 			if (
-				(options.keyword != "" && line[1].indexOf(options.keyword) < 0 && line[0] != options.keyword) ||
-				matchesSeason ||
-				matchesModule ||
-				matchesDay ||
-				matchesPeriod ||
-				(options.online != "null" && line[10].indexOf(options.online) < 0) ||
-				(options.req_A != "null" && options.req_A != line[12])) {
-				timeout = setTimeout(() => updateTable(options, index + 1, true), 0);
+				(options.keyword !== "" && !line[1].includes(options.keyword) && line[0] !== options.keyword) ||
+				(options.season !== "null" && !line[5].includes(options.season)) ||
+				(options.module_ !== "null" && !line[5].includes(options.module_)) ||
+				(options.day !== "null" && !line[6].includes(options.day)) ||
+				(options.period !== "null" && !line[6].includes(options.period)) ||
+				(options.online !== "null" && !line[10].includes(options.online)) ||
+				(options.req_A !== "null" && options.req_A !== line[12])) {
 				index++;
 				continue;
 			}
@@ -69,7 +59,7 @@ window.onload = function () {
 
 		createLine(line);
 
-		timeout = setTimeout(() => updateTable(options, index + 1, true), 10);
+		timeout = setTimeout(() => updateTable(options, index + 1), 10);
 	}
 
 	const search = (_) => {
@@ -84,10 +74,10 @@ window.onload = function () {
 		options.period = form.period.value;
 		options.online = form.online.value;
 
+		clearTimeout(timeout);
 		table.innerHTML = `<tr><th>科目番号<br>科目名</th><th>単位<br>年次</th>
       <th>学期<br>時期</th><th>教室</th><th>担当</th><th>実施形態</th><th>概要</th><th>備考</th></tr>`;
 
-		console.log(data);
 		updateTable(options);
 	}
 
