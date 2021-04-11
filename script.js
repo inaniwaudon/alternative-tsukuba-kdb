@@ -35,7 +35,7 @@ function search(e, no)
 	let choosen = [];
 	
 	for (let line of data) {
-		if (keyword != "" && line[1].indexOf(keyword) < 0)
+		if (keyword != "" && line[1].indexOf(keyword) < 0 && line[0] != keyword)
 			continue;
 
 		let matchesSeason = season != "null" && line[5].indexOf(season) < 0;
