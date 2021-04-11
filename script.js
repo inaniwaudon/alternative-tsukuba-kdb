@@ -1,5 +1,5 @@
 window.onload = function () {
-	const table = document.querySelector("main table");
+	const table = document.querySelector("main table tbody");
 	const keyword_input = document.querySelector("input[type=\"text\"]");
 	const form = document.getElementsByTagName("form")[0];
 	const req_A_input = document.getElementById("req_A");
@@ -130,9 +130,6 @@ window.onload = function () {
 		options.online = form.online.value;
 
 		clearTimeout(timeout);
-
-		table.innerHTML = `<tr><th>科目番号／科目名</th><th>単位／年次</th><th>学期／時期</th>
-			<th>教室</th><th>担当</th><th>実施形態</th><th>概要</th><th>備考</th></tr>`;
 
 		updateTable(options);
 	}
