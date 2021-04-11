@@ -100,7 +100,6 @@ window.onload = function () {
 		updateTable(options, maximum);
 	}
 
-
 	let submit = document.getElementById("submit");
 	submit.onclick = search;
 
