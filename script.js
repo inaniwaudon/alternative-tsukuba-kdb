@@ -31,33 +31,40 @@ window.onload = function () {
 
 	const updateTable = (options, index, continuous) => {
 		index = index || 0;
-		const line = data[index];
-
-		if (typeof line === 'undefined') {
-			clearTimeout(timeout);
-			timeout = void 0;
-			return;
-		}
+		let line;
 
 		if (!continuous && typeof timeout !== 'undefined') {
 			clearTimeout(timeout);
 		}
 
-		let matchesSeason = options.season != "null" && line[5].indexOf(options.season) < 0;
-		let matchesModule = options.module_ != "null" && line[5].indexOf(options.module_) < 0;
-		let matchesDay = options.day != "null" && line[6].indexOf(options.day) < 0;
-		let matchesPeriod = options.period != "null" && line[6].indexOf(options.period) < 0;
+		while (true) {
+			line = data[index];
 
-		if (
-			(options.keyword != "" && line[1].indexOf(options.keyword) < 0 && line[0] != options.keyword) ||
-			matchesSeason ||
-			matchesModule ||
-			matchesDay ||
-			matchesPeriod ||
-			(options.online != "null" && line[10].indexOf(options.online) < 0) ||
-			(options.req_A != "null" && options.req_A != line[12])) {
-			timeout = setTimeout(() => updateTable(options, index + 1, true), 0);
-			return;
+			if (typeof line === 'undefined') {
+				clearTimeout(timeout);
+				timeout = void 0;
+				return;
+			}
+
+			let matchesSeason = options.season != "null" && line[5].indexOf(options.season) < 0;
+			let matchesModule = options.module_ != "null" && line[5].indexOf(options.module_) < 0;
+			let matchesDay = options.day != "null" && line[6].indexOf(options.day) < 0;
+			let matchesPeriod = options.period != "null" && line[6].indexOf(options.period) < 0;
+
+			if (
+				(options.keyword != "" && line[1].indexOf(options.keyword) < 0 && line[0] != options.keyword) ||
+				matchesSeason ||
+				matchesModule ||
+				matchesDay ||
+				matchesPeriod ||
+				(options.online != "null" && line[10].indexOf(options.online) < 0) ||
+				(options.req_A != "null" && options.req_A != line[12])) {
+				timeout = setTimeout(() => updateTable(options, index + 1, true), 0);
+				index++;
+				continue;
+			}
+
+			break;
 		}
 
 		createLine(line);
