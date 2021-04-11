@@ -13,8 +13,7 @@ window.onload = function () {
 	const checkAbstract = document.getElementById("check-abstract");
 
 	// if the device is iOS, displayed lines are limited 500.
-	//const isIOS = ["iPhone", "iPad", "iPod"].some(name => navigator.userAgent.indexOf(name) > -1);
-	const isIOS = true;
+	const isIOS = ["iPhone", "iPad", "iPod"].some(name => navigator.userAgent.indexOf(name) > -1);
 	const lineLimit = 500;
 
 	let data = null;
@@ -64,7 +63,7 @@ window.onload = function () {
 	// update the table
 	const updateTable = (options, index, displayedIndex) => {
 		let regex = new RegExp(options.keyword);
-		
+
 		index = typeof index === 'undefined' ? 0 : index;
 		displayedIndex = typeof displayedIndex === "undefined" ? 0 : index;
 
