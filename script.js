@@ -3,6 +3,7 @@ window.onload = function () {
 	const keyword_input = document.querySelector("input[type=\"text\"]");
 	const form = document.getElementsByTagName("form")[0];
 	const req_A_input = document.getElementById("req_A");
+	const clearButton = document.getElementById("clear");
 
 	// checkbox
 	const checkName = document.getElementById("check-name");
@@ -13,6 +14,17 @@ window.onload = function () {
 
 	let data = null;
 	let timeout = void 0;
+
+	clearButton.addEventListener('click', (evt) => {
+		evt.stopPropagation();
+		keyword_input.value = "";
+		req_A_input.selectedIndex = 0;
+		form.season.value = "null";
+		form.module.value = "null";
+		form.day.value = "null";
+		form.period.value = "null";
+		form.online.value = "null";
+	});
 
 	// display a line of the table
 	const createLine = (line) => {
