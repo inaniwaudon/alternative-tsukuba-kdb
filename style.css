@@ -103,3 +103,8 @@ footer {
 	text-align: center;
 	margin-top: 1rem;
 }
+
+form {
+	position: sticky;
+	top: 0;
+}
