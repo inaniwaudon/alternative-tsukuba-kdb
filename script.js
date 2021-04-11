@@ -12,6 +12,11 @@ window.onload = function () {
 	const checkRoom = document.getElementById("check-room");
 	const checkAbstract = document.getElementById("check-abstract");
 
+	// if the device is iOS, displayed lines are limited 500.
+	//const isIOS = ["iPhone", "iPad", "iPod"].some(name => navigator.userAgent.indexOf(name) > -1);
+	const isIOS = true;
+	const lineLimit = 500;
+
 	let data = null;
 	let timeout = void 0;
 
@@ -57,9 +62,14 @@ window.onload = function () {
 
 
 	// update the table
-	const updateTable = (options, index) => {
+	const updateTable = (options, index, displayedIndex) => {
 		let regex = new RegExp(options.keyword);
+		
 		index = typeof index === 'undefined' ? 0 : index;
+		displayedIndex = typeof displayedIndex === "undefined" ? 0 : index;
+
+		if (displayedIndex >= lineLimit)
+			return;
 
 		for (; ;) {
 			const line = data[index];
@@ -99,7 +109,7 @@ window.onload = function () {
 			}
 
 			createLine(line);
-			timeout = setTimeout(() => updateTable(options, index + 1), 0);
+			timeout = setTimeout(() => updateTable(options, index + 1, ++displayedIndex), 0);
 			break;
 		}
 	}
