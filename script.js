@@ -65,8 +65,8 @@ window.onload = function () {
 		let regex = new RegExp(options.keyword);
 
 		index = typeof index === 'undefined' ? 0 : index;
-		displayedIndex = typeof displayedIndex === "undefined" ? 0 : index;
-
+		displayedIndex = typeof displayedIndex === "undefined" ? 0 : displayedIndex;
+		
 		if (isIOS && displayedIndex >= lineLimit)
 			return;
 
