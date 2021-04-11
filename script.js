@@ -67,7 +67,7 @@ window.onload = function () {
 
 		index = typeof index === 'undefined' ? 0 : index;
 		displayedIndex = typeof displayedIndex === "undefined" ? 0 : displayedIndex;
-		
+
 		if (isIOS && displayedIndex >= lineLimit)
 			return;
 
@@ -125,18 +125,18 @@ window.onload = function () {
 			row.length = 0;
 			for (c=0; c<table_.rows[r].cells.length; c++) {
 				field = table_.rows[r].cells[c].textContent;
-				if (r !== 0 && c == 0) {
+				if (r !== 0 && c === 0) {
 					field = field.slice(0,-4);
 				}
-				row.push(escaped.test(field)? '"'+field.replace(e, '""')+'"': field);
+				row.push(escaped.test(field)? '"' + field.replace(e, '""') + '"' : field);
 		 	}
 			csv.push(row.join(','));
 		}
 		var blob = new Blob([bom, csv.join('\n')], {'type': 'text/csv'});
-	  
+
 		if (window.navigator.msSaveBlob) {
 			// IE
-			window.navigator.msSaveBlob(blob, filename); 
+			window.navigator.msSaveBlob(blob, filename);
 		} else {
 			a.download = filename;
 			a.href = window.URL.createObjectURL(blob);
@@ -161,7 +161,7 @@ window.onload = function () {
 
 		return Y + M + D + h + m + d;
 	  }
-	
+
 	// search
 	const search = (e) => {
 		while (table.firstChild) {
