@@ -116,6 +116,9 @@ window.onload = function () {
 
 	// search
 	const search = (e) => {
+		while (table.firstChild) {
+        	table.removeChild(table.firstChild);
+		}
 		if (e !== null) {
 			e.stopPropagation();
 		}
