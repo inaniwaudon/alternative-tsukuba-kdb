@@ -13,7 +13,13 @@
 		<div class="content">
 			<form>
 				<p>
-					<span class="h4">科目名</span><input type="text" /> <a href="#" id="submit">検索</a>
+					<span class="h4">キーワード</span>
+					<input type="text" placeholder="科目番号は前方一致、その他は正規表現に対応" /> <a href="#" id="submit">検索</a>
+					<label><input type="checkbox" id="check-name" checked/>科目名</label>
+					<label><input type="checkbox" id="check-no" checked/>科目番号</label>
+					<label><input type="checkbox" id="check-room"/>教室</label>
+					<label><input type="checkbox" id="check-person"/>教員名</label>
+					<label><input type="checkbox" id="check-abstract"/>概要</label>
 				</p>
 				<p>
 					<span class="h4">要件</span>
@@ -96,18 +102,7 @@
 
 	<div id="page">
 		<main>
-			<table>
-				<tr>
-					<th>科目番号<br>科目名</th>
-					<th>単位<br>年次</th>
-					<th>学期<br>時期</th>
-					<th>教室</th>
-					<th>担当</th>
-					<th>実施形態</th>
-					<th>概要</th>
-					<th>備考</th>
-				</tr>
-			</table>
+			<table></table>
 		</main>
 		<footer>
 			(c) いなにわうどん - <a href="https://twitter.com/kyoto_mast21">@kyoto_mast21</a>

@@ -1,13 +1,24 @@
+const displayMaximum = 300;
+
 window.onload = function () {
 	const table = document.querySelector("main table");
 	const keyword_input = document.querySelector("input[type=\"text\"]");
 	const form = document.getElementsByTagName("form")[0];
 	const req_A_input = document.getElementById("req_A");
 
-	let data = null;
-	let timeout = void 0;
+	// checkbox
+	const checkName = document.getElementById("check-name");
+	const checkNo = document.getElementById("check-no");
+	const checkPerson = document.getElementById("check-person");
+	const checkRoom = document.getElementById("check-room");
+	const checkAbstract = document.getElementById("check-abstract");
 
-	const createLine = (line) => {
+	let data = null;
+
+
+	// display a line of the table
+	const createLine = (line) =>
+	{
 		let tr = document.createElement("tr");
 		table.appendChild(tr);
 
@@ -20,50 +31,58 @@ window.onload = function () {
 		tr.innerHTML += `<td>${line[7].replace(/,/g, "<br/>")}</td>`;
 		tr.innerHTML += `<td>${line[8].replace(/,/g, "<br/>")}</td>`;
 
-		if (methods.length < 1) {
+		if (methods.length < 1)
 			tr.innerHTML += "<td>不詳</td>"
-		} else {
-			tr.innerHTML += `<td>${methods.join('<br />')}<br /></td>`;
-		}
+		else
+			tr.innerHTML += `<td>${methods.join('<br/>')}<br /></td>`;
 
 		tr.innerHTML += `<td>${line[9]}</td>`;
+		tr.innerHTML += `<td>${line[10]}</td>`;
 	}
 
-	const updateTable = (options, index) => {
-		index = index || 0;
-		let line;
 
-		while (true) {
-			line = data[index];
+	// update the table
+	const updateTable = (options, maximum) =>
+	{
+		let index = 0;
 
-			if (typeof line === 'undefined') {
-				clearTimeout(timeout);
-				timeout = void 0;
-				return;
-			}
+		for (let line of data) {
+			let regex = new RegExp(options.keyword);
 
-			if (
-				(options.keyword !== "" && !line[1].includes(options.keyword) && line[0] !== options.keyword) ||
-				(options.season !== "null" && !line[5].includes(options.season)) ||
-				(options.module_ !== "null" && !line[5].includes(options.module_)) ||
-				(options.day !== "null" && !line[6].includes(options.day)) ||
-				(options.period !== "null" && !line[6].includes(options.period)) ||
-				(options.online !== "null" && !line[10].includes(options.online)) ||
-				(options.req_A !== "null" && options.req_A !== line[12])) {
-				index++;
+			// keyword
+			let matchesNo = checkNo.checked ? line[0].indexOf(options.keyword) != 0 : true;
+			let matchesName = checkName.checked ? line[1].match(regex) == null : true;
+			let matchesRoom = checkRoom.checked ? line[7].match(regex) == null : true;
+			let matchesPerson = checkPerson.checked ? line[8].match(regex) == null : true;
+			let matchesAbstract = checkAbstract.checked ? line[9].match(regex) == null : true;
+
+			let matchesKeyword = options.keyword != "" && 
+				(matchesNo && matchesName && matchesRoom && matchesPerson && matchesAbstract);
+
+			// other options
+			let matchesSeason = options.season != "null" && line[5].indexOf(options.season) < 0;
+			let matchesModule = options.module_ != "null" && line[5].indexOf(options.module_) < 0;
+			let matchesDay = options.day != "null" && line[6].indexOf(options.day) < 0;
+			let matchesPeriod = options.period != "null" && line[6].indexOf(options.period) < 0;
+			let matchesOnline = options.online != "null" && line[10].indexOf(options.online) < 0;
+			let matchesReq_A = options.req_A != "null" && options.req_A != line[12];
+
+			if (matchesKeyword || matchesSeason || matchesModule ||
+				matchesDay || matchesPeriod || matchesOnline || matchesReq_A)
 				continue;
-			}
 
-			break;
+			createLine(line);
+			index++;
+
+			if (index >= maximum)
+				return;
 		}
-
-		createLine(line);
-
-		timeout = setTimeout(() => updateTable(options, index + 1), 10);
 	}
 
-	const search = (_) => {
 
+	// search
+	const search = (e, maximum) =>
+	{
 		let options = {};
 
 		options.keyword = keyword_input.value;
@@ -74,11 +93,11 @@ window.onload = function () {
 		options.period = form.period.value;
 		options.online = form.online.value;
 
-		clearTimeout(timeout);
-		table.innerHTML = `<tr><th>科目番号<br>科目名</th><th>単位<br>年次</th>
-      <th>学期<br>時期</th><th>教室</th><th>担当</th><th>実施形態</th><th>概要</th><th>備考</th></tr>`;
-
-		updateTable(options);
+		table.innerHTML = `<tr><th>科目番号／科目名</th><th>単位／年次</th><th>学期／時期</th>
+			<th>教室</th><th>担当</th><th>実施形態</th><th>概要</th><th>備考</th></tr>`;
+		
+		maximum = maximum || displayMaximum;
+		updateTable(options, maximum);
 	}
 
 	let submit = document.getElementById("submit");
@@ -86,5 +105,5 @@ window.onload = function () {
 
 	fetch("kdb.json")
 		.then(response => response.json())
-		.then(json => { data = json; search(null, 7); })
+		.then(json => { data = json; search(null, 7); });
 };
