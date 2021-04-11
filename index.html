@@ -1,108 +1,120 @@
 <!doctype html>
 <html>
+
 <head>
 	<title>筑波大学 KdBっぽいなにか</title>
 	<meta charset="utf-8">
-	<link href="style.css" rel="stylesheet"/>
-	<script src="script.js"/></script>
+	<link href="style.css" rel="stylesheet" />
+	<script src="script.js"></script>
 </head>
 
 <body>
-<header>
-	<div class="content"><form>
-		<p>
-			<span class="h4">科目名</span><input type="text"/> <a href="#" id="submit"/>検索</a>
-		</p>
-		<p>
-			<span class="h4">要件</span><!--
-			--><select id="req_A">
-				<option value="null">指定なし</option>
-				<option>フレッシュマン・セミナー</option>
-				<option>学問への誘い</option>
-				<option>学士基盤科目</option>
-				<option>体育</option>
-				<option>外国語（英語）</option>
-				<option>外国語（ドイツ語）</option>
-				<option>外国語（フランス語）</option>
-				<option>外国語（中国語）</option>
-				<option>外国語（ロシア語）</option>
-				<option>外国語（スペイン語）</option>
-				<option>外国語（朝鮮語）</option>
-				<option>外国語（日本語、Japan-Expert（学士）プログラム）</option>
-				<option>外国語外国語（短期留学生用カリキュラム）</option>
-				<option>情報</option>
-				<option>国語</option>
-				<option>芸術</option>
-				<option>自由科目（特設）</option>
-				<option>教職に関する科目</option>
-				<option>博物館に関する科目</option>
-				<option>日本事情等科目</option>
-				<option>人文・文化学群</option>
-				<option>社会・国際学群</option>
-				<option>人間学群</option>
-				<option>生命環境学群</option>
-				<option>理工学群</option>
-				<option>情報学群</option>
-				<option>医学群</option>
-				<option>体育専門学群</option>
-				<option>芸術専門学群</option>
-				<option>グローバル教育院　地球規模課題学位プログラム</option>
-				<option>English Courses</option>
-			</select><!--
-			--><select>
-			</select>
-		</p>
-		</p>
-		<p>
-			<span class="h4">学期</span>
-			<label><input type="radio" name="season" value="null" checked>―</label>
-			<label><input type="radio" name="season" value="春">春</label>
-			<label><input type="radio" name="season" value="秋">秋</label>
-			／
-			<label><input type="radio" name="module" value="null" checked>―</label>
-			<label><input type="radio" name="module" value="A">A</label>
-			<label><input type="radio" name="module" value="B">B</label>
-			<label><input type="radio" name="module" value="C">C</label>
-		</p>
-		<p>
-			<span class="h4">時限</span>
-			<label><input type="radio" name="day" value="null" checked>―</label>
-			<label><input type="radio" name="day" value="月">月</label>
-			<label><input type="radio" name="day" value="火">火</label>
-			<label><input type="radio" name="day" value="水">水</label>
-			<label><input type="radio" name="day" value="木">木</label>
-			<label><input type="radio" name="day" value="金">金</label>
-			<label><input type="radio" name="day" value="土">土</label>
-			<label><input type="radio" name="day" value="日">日</label>
-			／
-			<label><input type="radio" name="period" value="null" checked>―</label>
-			<label><input type="radio" name="period" value="1">1</label>
-			<label><input type="radio" name="period" value="2">2</label>
-			<label><input type="radio" name="period" value="3">3</label>
-			<label><input type="radio" name="period" value="4">4</label>
-			<label><input type="radio" name="period" value="5">5</label>
-			<label><input type="radio" name="period" value="5">6</label>
-		</p>
-		<p>
-			<span class="h4">実施形態</span>
-			<label><input type="radio" name="online" value="null" checked>―</label>
-			<label><input type="radio" name="online" value="対面">対面</label>
-			<label><input type="radio" name="online" value="オンデマンド">オンデマンド</label>
-			<label><input type="radio" name="online" value="同時双方向">同時双方向</label>
-		</p>
-	</form></div>
-</header>
+	<header>
+		<div class="content">
+			<form>
+				<p>
+					<span class="h4">科目名</span><input type="text" /> <a href="#" id="submit">検索</a>
+				</p>
+				<p>
+					<span class="h4">要件</span>
+					<select id="req_A">
+						<option value="null">指定なし</option>
+						<option>フレッシュマン・セミナー</option>
+						<option>学問への誘い</option>
+						<option>学士基盤科目</option>
+						<option>体育</option>
+						<option>外国語（英語）</option>
+						<option>外国語（ドイツ語）</option>
+						<option>外国語（フランス語）</option>
+						<option>外国語（中国語）</option>
+						<option>外国語（ロシア語）</option>
+						<option>外国語（スペイン語）</option>
+						<option>外国語（朝鮮語）</option>
+						<option>外国語（日本語、Japan-Expert（学士）プログラム）</option>
+						<option>外国語外国語（短期留学生用カリキュラム）</option>
+						<option>情報</option>
+						<option>国語</option>
+						<option>芸術</option>
+						<option>自由科目（特設）</option>
+						<option>教職に関する科目</option>
+						<option>博物館に関する科目</option>
+						<option>日本事情等科目</option>
+						<option>人文・文化学群</option>
+						<option>社会・国際学群</option>
+						<option>人間学群</option>
+						<option>生命環境学群</option>
+						<option>理工学群</option>
+						<option>情報学群</option>
+						<option>医学群</option>
+						<option>体育専門学群</option>
+						<option>芸術専門学群</option>
+						<option>グローバル教育院　地球規模課題学位プログラム</option>
+						<option>English Courses</option>
+					</select>
+					<select>
+					</select>
+				</p>
+				</p>
+				<p>
+					<span class="h4">学期</span>
+					<label><input type="radio" name="season" value="null" checked>―</label>
+					<label><input type="radio" name="season" value="春">春</label>
+					<label><input type="radio" name="season" value="秋">秋</label>
+					／
+					<label><input type="radio" name="module" value="null" checked>―</label>
+					<label><input type="radio" name="module" value="A">A</label>
+					<label><input type="radio" name="module" value="B">B</label>
+					<label><input type="radio" name="module" value="C">C</label>
+				</p>
+				<p>
+					<span class="h4">時限</span>
+					<label><input type="radio" name="day" value="null" checked>―</label>
+					<label><input type="radio" name="day" value="月">月</label>
+					<label><input type="radio" name="day" value="火">火</label>
+					<label><input type="radio" name="day" value="水">水</label>
+					<label><input type="radio" name="day" value="木">木</label>
+					<label><input type="radio" name="day" value="金">金</label>
+					<label><input type="radio" name="day" value="土">土</label>
+					<label><input type="radio" name="day" value="日">日</label>
+					／
+					<label><input type="radio" name="period" value="null" checked>―</label>
+					<label><input type="radio" name="period" value="1">1</label>
+					<label><input type="radio" name="period" value="2">2</label>
+					<label><input type="radio" name="period" value="3">3</label>
+					<label><input type="radio" name="period" value="4">4</label>
+					<label><input type="radio" name="period" value="5">5</label>
+					<label><input type="radio" name="period" value="5">6</label>
+				</p>
+				<p>
+					<span class="h4">実施形態</span>
+					<label><input type="radio" name="online" value="null" checked>―</label>
+					<label><input type="radio" name="online" value="対面">対面</label>
+					<label><input type="radio" name="online" value="オンデマンド">オンデマンド</label>
+					<label><input type="radio" name="online" value="同時双方向">同時双方向</label>
+				</p>
+			</form>
+		</div>
+	</header>
 
-<div id="page">
-	<main>
-		<table>
-			<tr><th>科目番号<br>科目名</th><th>単位<br>年次</th><th>学期<br>時期</th>
-			<th>教室</th><th>担当</th><th>実施形態</th><th>概要</th><th>備考</th></tr>
-		</table>
-	</main>
-	<footer>
-		(c) いなにわうどん - <a href="https://twitter.com/kyoto_mast21">@kyoto_mast21</a>
-	</footer>
-</div>
+	<div id="page">
+		<main>
+			<table>
+				<tr>
+					<th>科目番号<br>科目名</th>
+					<th>単位<br>年次</th>
+					<th>学期<br>時期</th>
+					<th>教室</th>
+					<th>担当</th>
+					<th>実施形態</th>
+					<th>概要</th>
+					<th>備考</th>
+				</tr>
+			</table>
+		</main>
+		<footer>
+			(c) いなにわうどん - <a href="https://twitter.com/kyoto_mast21">@kyoto_mast21</a>
+		</footer>
+	</div>
 </body>
+
 </html>
