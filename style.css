@@ -50,7 +50,7 @@ header input[type="text"], header select {
 	-webkit-appearance: none;
 }
 
-a#submit {
+a#submit, a#clear {
 	color: #fff;
 	height: 1rem;
 	line-height:1rem;
