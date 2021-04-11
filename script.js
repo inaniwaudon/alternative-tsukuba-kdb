@@ -67,7 +67,7 @@ window.onload = function () {
 		index = typeof index === 'undefined' ? 0 : index;
 		displayedIndex = typeof displayedIndex === "undefined" ? 0 : index;
 
-		if (displayedIndex >= lineLimit)
+		if (isIOS && displayedIndex >= lineLimit)
 			return;
 
 		for (; ;) {
