@@ -4,6 +4,7 @@ window.onload = function () {
 	const form = document.getElementsByTagName("form")[0];
 	const req_A_input = document.getElementById("req_A");
 	const clearButton = document.getElementById("clear");
+	const downloadLink = document.getElementById("download");
 
 	// checkbox
 	const checkName = document.getElementById("check-name");
@@ -113,7 +114,51 @@ window.onload = function () {
 		}
 	}
 
+	// convert table data to CSV file with utf-8 BOM
+	const makeCSV = (a, table_, filename) => {
+		var escaped = /,|\r?\n|\r|"/;
+		var e = /"/g;
 
+		var bom = new Uint8Array([0xEF, 0xBB, 0xBF]);
+		var csv = [], row = [], field, r, c;
+		for (r=0;  r<table_.rows.length; r++) {
+			row.length = 0;
+			for (c=0; c<table_.rows[r].cells.length; c++) {
+				field = table_.rows[r].cells[c].textContent;
+				row.push(escaped.test(field)? '"'+field.replace(e, '""')+'"': field);
+		 	}
+			csv.push(row.join(','));
+		}
+		var blob = new Blob([bom, csv.join('\n')], {'type': 'text/csv'});
+	  
+		if (window.navigator.msSaveBlob) {
+			// IE
+			window.navigator.msSaveBlob(blob, filename); 
+		} else {
+			a.download = filename;
+			a.href = window.URL.createObjectURL(blob);
+		}
+	}
+
+	// download CSV file: `kdb_YYYYMMDDhhmmdd.csv`
+	const downloadCSV = () => {
+		makeCSV(
+			downloadLink, document.querySelector("main table"), `kdb_${getDateString()}.csv`);
+	}
+
+	// get YYYYMMDDhhmmdd
+	const getDateString = () => {
+		let date = new Date();
+		let Y = date.getFullYear();
+		let M = ("00" + (date.getMonth()+1)).slice(-2);
+		let D = ("00" + date.getDate()).slice(-2);
+		let h = ('0' + date.getHours()).slice(-2);
+		let m = ('0' + date.getMinutes()).slice(-2);
+		let d = ('0' + date.getSeconds()).slice(-2);
+
+		return Y + M + D + h + m + d;
+	  }
+	
 	// search
 	const search = (e) => {
 		while (table.firstChild) {
@@ -139,6 +184,7 @@ window.onload = function () {
 
 	let submit = document.getElementById("submit");
 	submit.onclick = search;
+	downloadLink.onclick = downloadCSV;
 
 	fetch("kdb.json")
 		.then(response => response.json())
