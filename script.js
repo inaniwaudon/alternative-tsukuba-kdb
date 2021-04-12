@@ -124,9 +124,9 @@ window.onload = function () {
 		for (r=0;  r<table_.rows.length; r++) {
 			row.length = 0;
 			for (c=0; c<table_.rows[r].cells.length; c++) {
-				field = table_.rows[r].cells[c].textContent;
+				field = table_.rows[r].cells[c].innerText;
 				if (r !== 0 && c === 0) {
-					field = field.slice(0,-4);
+					field = field.slice(0,-5);
 				}
 				row.push(escaped.test(field)? '"' + field.replace(e, '""') + '"' : field);
 		 	}
