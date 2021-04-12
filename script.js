@@ -67,16 +67,13 @@ window.onload = function () {
 
 		index = typeof index === 'undefined' ? 0 : index;
 		displayedIndex = typeof displayedIndex === "undefined" ? 0 : displayedIndex;
-		
-		if (isIOS && displayedIndex >= lineLimit)
-			return;
+
+		if (isIOS && displayedIndex >= lineLimit) return;
 
 		for (; ;) {
 			const line = data[index];
 
-			if (typeof line === 'undefined') {
-				return;
-			}
+			if (typeof line === 'undefined') return;
 
 			// keyword
 			const matchesNo = checkNo.checked ? line[0].indexOf(options.keyword) != 0 : true;
@@ -162,11 +159,9 @@ window.onload = function () {
 	// search
 	const search = (e) => {
 		while (table.firstChild) {
-	        	table.removeChild(table.firstChild);
+			table.removeChild(table.firstChild);
 		}
-		if (e !== null) {
-			e.stopPropagation();
-		}
+		if (e !== null) e.stopPropagation();
 		let options = {};
 
 		options.keyword = keyword_input.value;
