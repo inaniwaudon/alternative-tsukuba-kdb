@@ -181,7 +181,9 @@ window.onload = function () {
 	submit.onclick = search;
 	downloadLink.onclick = downloadCSV;
 
-	fetch("kdb.json")
-		.then(response => response.json())
-		.then(json => { data = json; search(null); });
+	(async () => {
+		const response = await fetch("kdb.json");
+		data = await response.json();
+		search(null);
+	})();
 };
