@@ -20,6 +20,14 @@ window.onload = function () {
 	let data = null;
 	let timeout = void 0;
 
+	keyword_input.addEventListener("keydown", (evt) => {
+		const KEYCODE_ENTER = 13;
+		if (evt.keyCode === KEYCODE_ENTER) {
+			evt.preventDefault();
+			search(evt);
+		}
+	});
+
 	clearButton.addEventListener('click', (evt) => {
 		evt.stopPropagation();
 		keyword_input.value = "";
