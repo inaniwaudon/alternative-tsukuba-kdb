@@ -39,11 +39,11 @@ window.onload = function () {
 
 	// display a line of the table
 	const createLine = (line) => {
-		let tr = document.createElement("tr");
+		const tr = document.createElement("tr");
 		table.appendChild(tr);
 
-		let url = `https://kdb.tsukuba.ac.jp/syllabi/2021/${line[0]}/jpn`;
-		let methods = ["対面", "オンデマンド", "同時双方向"].filter(it => line[10].indexOf(it) > -1);
+		const url = `https://kdb.tsukuba.ac.jp/syllabi/2021/${line[0]}/jpn`;
+		const methods = ["対面", "オンデマンド", "同時双方向"].filter(it => line[10].indexOf(it) > -1);
 
 		tr.innerHTML += `<td>${line[0]}<br/>${line[1]}<br/><a href="${url}" class="syllabus" target="_blank">シラバス</a></td>`;
 		tr.innerHTML += `<td>${line[3]}単位<br/>${line[4]}年次</td>`;
@@ -63,7 +63,7 @@ window.onload = function () {
 
 	// update the table
 	const updateTable = (options, index, displayedIndex) => {
-		let regex = new RegExp(options.keyword);
+		const regex = new RegExp(options.keyword);
 
 		index = typeof index === 'undefined' ? 0 : index;
 		displayedIndex = typeof displayedIndex === "undefined" ? 0 : displayedIndex;
@@ -79,22 +79,22 @@ window.onload = function () {
 			}
 
 			// keyword
-			let matchesNo = checkNo.checked ? line[0].indexOf(options.keyword) != 0 : true;
-			let matchesName = checkName.checked ? line[1].match(regex) == null : true;
-			let matchesRoom = checkRoom.checked ? line[7].match(regex) == null : true;
-			let matchesPerson = checkPerson.checked ? line[8].match(regex) == null : true;
-			let matchesAbstract = checkAbstract.checked ? line[9].match(regex) == null : true;
+			const matchesNo = checkNo.checked ? line[0].indexOf(options.keyword) != 0 : true;
+			const matchesName = checkName.checked ? line[1].match(regex) == null : true;
+			const matchesRoom = checkRoom.checked ? line[7].match(regex) == null : true;
+			const matchesPerson = checkPerson.checked ? line[8].match(regex) == null : true;
+			const matchesAbstract = checkAbstract.checked ? line[9].match(regex) == null : true;
 
-			let matchesKeyword = options.keyword != "" &&
+			const matchesKeyword = options.keyword != "" &&
 				(matchesNo && matchesName && matchesRoom && matchesPerson && matchesAbstract);
 
 			// other options
-			let missMatchesSeason = options.season != "null" && line[5].indexOf(options.season) < 0;
-			let missMatchesModule = options.module_ != "null" && line[5].indexOf(options.module_) < 0;
-			let missMatchesDay = options.day != "null" && line[6].indexOf(options.day) < 0;
-			let missMatchesPeriod = options.period != "null" && line[6].indexOf(options.period) < 0;
-			let missMatchesOnline = options.online != "null" && line[10].indexOf(options.online) < 0;
-			let missMatchesReq_A = options.req_A != "null" && options.req_A != line[12];
+			const missMatchesSeason = options.season != "null" && line[5].indexOf(options.season) < 0;
+			const missMatchesModule = options.module_ != "null" && line[5].indexOf(options.module_) < 0;
+			const missMatchesDay = options.day != "null" && line[6].indexOf(options.day) < 0;
+			const missMatchesPeriod = options.period != "null" && line[6].indexOf(options.period) < 0;
+			const missMatchesOnline = options.online != "null" && line[10].indexOf(options.online) < 0;
+			const missMatchesReq_A = options.req_A != "null" && options.req_A != line[12];
 
 			if (
 				matchesKeyword ||
@@ -116,24 +116,24 @@ window.onload = function () {
 
 	// convert table data to CSV file with utf-8 BOM
 	const makeCSV = (a, table_, filename) => {
-		var escaped = /,|\r?\n|\r|"/;
-		var e = /"/g;
+		const escaped = /,|\r?\n|\r|"/;
+		const e = /"/g;
 
-		var bom = new Uint8Array([0xEF, 0xBB, 0xBF]);
-		var csv = [], row = [], field, r, c;
-		for (r=0;  r<table_.rows.length; r++) {
+		const bom = new Uint8Array([0xEF, 0xBB, 0xBF]);
+		let csv = [], row = [], field, r, c;
+		for (r = 0; r < table_.rows.length; r++) {
 			row.length = 0;
-			for (c=0; c<table_.rows[r].cells.length; c++) {
+			for (c = 0; c < table_.rows[r].cells.length; c++) {
 				field = table_.rows[r].cells[c].textContent;
-				row.push(escaped.test(field)? '"'+field.replace(e, '""')+'"': field);
-		 	}
+				row.push(escaped.test(field) ? '"' + field.replace(e, '""') + '"' : field);
+			}
 			csv.push(row.join(','));
 		}
-		var blob = new Blob([bom, csv.join('\n')], {'type': 'text/csv'});
-	  
+		const blob = new Blob([bom, csv.join('\n')], {'type': 'text/csv'});
+
 		if (window.navigator.msSaveBlob) {
 			// IE
-			window.navigator.msSaveBlob(blob, filename); 
+			window.navigator.msSaveBlob(blob, filename);
 		} else {
 			a.download = filename;
 			a.href = window.URL.createObjectURL(blob);
@@ -148,17 +148,17 @@ window.onload = function () {
 
 	// get YYYYMMDDhhmmdd
 	const getDateString = () => {
-		let date = new Date();
-		let Y = date.getFullYear();
-		let M = ("00" + (date.getMonth()+1)).slice(-2);
-		let D = ("00" + date.getDate()).slice(-2);
-		let h = ('0' + date.getHours()).slice(-2);
-		let m = ('0' + date.getMinutes()).slice(-2);
-		let d = ('0' + date.getSeconds()).slice(-2);
+		const date = new Date();
+		const Y = date.getFullYear();
+		const M = ("00" + (date.getMonth() + 1)).slice(-2);
+		const D = ("00" + date.getDate()).slice(-2);
+		const h = ('0' + date.getHours()).slice(-2);
+		const m = ('0' + date.getMinutes()).slice(-2);
+		const d = ('0' + date.getSeconds()).slice(-2);
 
 		return Y + M + D + h + m + d;
-	  }
-	
+	}
+
 	// search
 	const search = (e) => {
 		while (table.firstChild) {
@@ -182,7 +182,7 @@ window.onload = function () {
 		updateTable(options);
 	}
 
-	let submit = document.getElementById("submit");
+	const submit = document.getElementById("submit");
 	submit.onclick = search;
 	downloadLink.onclick = downloadCSV;
 
